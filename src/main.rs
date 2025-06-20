@@ -1,7 +1,7 @@
 /**
  * @FileName        hss-cli-rust/src/main.rs
  * @CreatedTime     五, 06 20, 2025 10:07:19 CST
- * @LastModified    五, 06 20, 2025 14:25:12 CST
+ * @LastModified    五, 06 20, 2025 14:50:19 CST
  * @Author          QuanQuan <millionfor@apache.org>
  * @Description     {{FILER}}
  */
@@ -291,7 +291,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     
     if args.len() < 2 {
         eprintln!("用法：");
-        eprintln!("登录: hss-cli login <user> <token>");
+        eprintln!("登录: hss-cli login <jenkins_url> <user> <token>");
         eprintln!("构建: hss-cli build <project> <branch> <env>");
         return Ok(());
     }
