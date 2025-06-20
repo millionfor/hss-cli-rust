@@ -1,7 +1,7 @@
 /**
  * @FileName        hss-cli-rust/src/main.rs
  * @CreatedTime     五, 06 20, 2025 10:07:19 CST
- * @LastModified    五, 06 20, 2025 10:30:08 CST
+ * @LastModified    五, 06 20, 2025 14:25:12 CST
  * @Author          QuanQuan <millionfor@apache.org>
  * @Description     {{FILER}}
  */
@@ -291,8 +291,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     
     if args.len() < 2 {
         eprintln!("用法：");
-        eprintln!("登录: cargo run login <user> <token>");
-        eprintln!("构建: cargo run build <project> <branch> <env>");
+        eprintln!("登录: hss-cli login <user> <token>");
+        eprintln!("构建: hss-cli build <project> <branch> <env>");
         return Ok(());
     }
 
@@ -301,7 +301,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     match command.as_str() {
         "login" => {
             if args.len() != 5 {
-                eprintln!("用法: cargo run login <jenkins_url> <user> <token>");
+                eprintln!("用法: hss-cli login <jenkins_url> <user> <token>");
                 return Ok(());
             }
             
@@ -321,7 +321,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         
         "build" => {
             if args.len() != 5 {
-                eprintln!("用法: cargo run build <project> <branch> <env>");
+                eprintln!("用法: hss-cli build <project> <branch> <env>");
                 return Ok(());
             }
             
@@ -334,7 +334,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
                 ) {
                     (Some(j), Some(u), Some(t)) => (j.as_str(), u.as_str(), t.as_str()),
                     _ => {
-                        eprintln!("请先运行 'cargo run login <jenkins_url> <user> <token>' 进行登录");
+                        eprintln!("请先运行 'hss-cli login <jenkins_url> <user> <token>' 进行登录");
                         return Ok(());
                     }
                 };
