@@ -1,5 +1,5 @@
 [package]
-name = "hss-cli"
+name = "hss-cli-rust"
 version = "1.0.0"
 edition = "2021"
 
