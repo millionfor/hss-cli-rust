@@ -50,3 +50,19 @@ jobs:
         with:
           name: ${{ matrix.target }}-binary
           path: target/${{ matrix.target }}/release/hss-cli-rust
+
+      - name: Create Release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: Release ${{ github.ref_name }}
+          draft: false
+          prerelease: false
+
+      - name: Upload Release Asset
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          files: target/${{ matrix.target }}/release/hss-cli-rust
