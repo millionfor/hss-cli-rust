@@ -1,3 +1,9 @@
+//! jenkins2
+//! @CreatedTime     五, 06 20, 2025 19:52:10 CST
+//! @LastModified    五, 06 20, 2025 19:52:10 CST
+//! @Author          QuanQuan <millionfor@apache.org>
+//! @Description     {{FILER}}
+
 use jenkins_sdk::{
     JenkinsAsync,
     StopBuild,

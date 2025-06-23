@@ -1,7 +1,7 @@
 /**
  * @FileName        hss-cli-rust/src/main.rs
  * @CreatedTime     五, 06 20, 2025 10:07:19 CST
- * @LastModified    五, 06 20, 2025 17:40:01 CST
+ * @LastModified    五, 06 20, 2025 20:18:37 CST
  * @Author          QuanQuan <millionfor@apache.org>
  * @Description     {{FILER}}
  */
@@ -19,7 +19,7 @@ use jenkins_sdk::{
 };
 use serde_json::Value;
 use tokio;
-use std::time::Duration;
+use std::{env::args, time::Duration};
 use std::fs;
 use std::io::{self, BufRead, Write};
 use std::path::PathBuf;
@@ -322,6 +322,15 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
                 }
             }
         },
+
+        "loginh" => {
+            if args.len() != 5 {
+                  eprintln!("用法: hss-cli loginh <hops_url> <user> <password>");
+                  return Ok(());
+            }
+        },
+        
+
         
         _ => {
             eprintln!("未知命令: {}", command);

@@ -33,7 +33,7 @@
 ### 1. 登录 Jenkins
 
 ```bash
-cargo run login <jenkins_url> <user> <token>
+hss-cli login <jenkins_url> <user> <token>
 ```
 - `<jenkins_url>`: Jenkins 服务器地址（如 https://jenkins.example.com/）
 - `<user>`: Jenkins 用户名
@@ -41,13 +41,13 @@ cargo run login <jenkins_url> <user> <token>
 
 示例：
 ```bash
-cargo run login https://jenkins.example.com/ admin 1234567890abcdef
+hss-cli login https://jenkins.example.com/ admin 1234567890abcdef
 ```
 
 ### 2. 触发构建并监控日志
 
 ```bash
-cargo run build <project> <branch> <env>
+hss-cli build <project> <branch> <env>
 ```
 - `<project>`: Jenkins Job 名称
 - `<branch>`: 代码分支名（如 master、dev 等）
@@ -55,7 +55,7 @@ cargo run build <project> <branch> <env>
 
 示例：
 ```bash
-cargo run build my-job master test
+hss-cli build my-job master test
 ```
 
 - 构建过程中会自动输出 Jenkins 控制台日志。
@@ -64,7 +64,7 @@ cargo run build my-job master test
 
 ## 常见问题
 
-- 如果提示“请先运行 'cargo run login <jenkins_url> <user> <token>' 进行登录”，请先完成登录配置。
+- 如果提示“请先运行 'hss-cli login <jenkins_url> <user> <token>' 进行登录”，请先完成登录配置。
 - 配置文件 `.hssrc` 位于用户主目录下，可手动编辑。
 
 ## 依赖
