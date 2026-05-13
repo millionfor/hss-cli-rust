@@ -1,7 +1,7 @@
 /**
  * @FileName        hss-cli-rust/src/main.rs
  * @CreatedTime     五, 06 20, 2025 10:07:19 CST
- * @LastModified    五, 06 20, 2025 20:18:37 CST
+ * @LastModified    五, 07 04, 2025 17:49:49 CST
  * @Author          QuanQuan <millionfor@apache.org>
  * @Description     {{FILER}}
  */
@@ -25,9 +25,13 @@ use std::io::{self, BufRead, Write};
 use std::path::PathBuf;
 use std::collections::HashMap;
 
+
+
 mod jenkins;
+mod hops;
 
 use jenkins::jenkins_stop;
+use hops::fetch_and_save_token;
 
 // 读取现有配置文件
 fn read_config() -> io::Result<HashMap<String, String>> {
@@ -252,8 +256,16 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     
     if args.len() < 2 {
         eprintln!("用法：");
-        eprintln!("登录: hss-cli login <jenkins_url> <user> <token>");
-        eprintln!("构建: hss-cli build <project> <branch> <env>");
+        eprintln!("Jenkins");
+        eprintln!(" -登录: hss-cli login <jenkins_url> <user> <token>");
+        eprintln!(" -构建: hss-cli build <project> <branch> <env>");
+        eprintln!("Hops");
+        eprintln!(" -登录: hss-cli loginh <user> <password>");
+        eprintln!(" -查询: hss-cli queryh <page>");
+        eprintln!(" -提交: hss-cli submith <tapd_id> <date> <work_hours> <content>");
+        eprintln!("Tapd");
+        eprintln!(" -登录: hss-cli logint <user> <password>");
+        eprintln!(" -查询: hss-cli queryt <name> <type 1需求 2缺陷>");
         return Ok(());
     }
 
@@ -324,13 +336,16 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         },
 
         "loginh" => {
-            if args.len() != 5 {
-                  eprintln!("用法: hss-cli loginh <hops_url> <user> <password>");
-                  return Ok(());
+            if args.len() != 4 {
+                eprintln!("用法: hss-cli loginh <hops_url> <user> <password>");
+                return Ok(());
+            }
+
+            // 第一次立即执行
+            if let Err(e) = fetch_and_save_token().await {
+                eprintln!("Error fetching token: {}", e);
             }
         },
-        
-
         
         _ => {
             eprintln!("未知命令: {}", command);
